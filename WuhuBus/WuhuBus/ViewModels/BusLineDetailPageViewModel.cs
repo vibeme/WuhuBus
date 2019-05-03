@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using WuhuBus.Annotations;
+using WuhuBus.ApiSdk.Input;
 using WuhuBus.ApiSdk.OutPut;
 using WuhuBus.Models;
 
@@ -51,11 +52,14 @@ namespace WuhuBus.ViewModels
         public string UpLine { get; set; }
         public string UpLineRunTime { get; set; }
         public List<GetLineDetailOutput.Station> UpLineStationList { get; set; }
+        public string UpLineLastFocusStation { get; set; }
 
         public string DownLine { get; set; }
         public string DownLineRunTime { get; set; }
         public List<GetLineDetailOutput.Station> DownLineStationList { get; set; }
+        public string DownLineLastFocusStation { get; set; }
 
+        public GetArriveInfoInput.LineType LastLineType { get; set; }
 
         public BusLine ToBusLine()
         {
@@ -64,7 +68,10 @@ namespace WuhuBus.ViewModels
                 Name = LineName,
                 RunTime = $"运营时间：{UpLineRunTime.Substring(5)},{DownLineRunTime.Substring(5)}",
                 UpLine = UpLine.Substring(2),
-                DownLine = DownLine.Substring(2)
+                UpLineLastFocusStation = UpLineLastFocusStation,
+                DownLine = DownLine.Substring(2),
+                DownLineLastFocusStation = DownLineLastFocusStation,
+                LastLineType = LastLineType
             };
         }
 

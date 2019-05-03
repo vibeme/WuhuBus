@@ -15,6 +15,7 @@ namespace WuhuBus.ApiSdk.Input
 
         public enum LineType
         {
+            UN_KNOW = 0,
             UP = 1,
             DOWN = 2
         }

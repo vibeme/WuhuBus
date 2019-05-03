@@ -29,10 +29,7 @@ namespace WuhuBus.ViewModels
 
         public void LoadLines()
         {
-            var task = App.Db.Table<BusLine>().ToListAsync();
-            task.Wait();
-            var lines = task.Result;
-
+            var lines = App.Db.Table<BusLine>().ToListAsync().Result;
             Lines = new ObservableCollection<BusLine>(lines);
         }
     

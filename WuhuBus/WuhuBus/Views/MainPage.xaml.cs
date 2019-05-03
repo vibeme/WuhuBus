@@ -85,6 +85,10 @@ namespace WuhuBus.Views
             //如果已经收藏过则进行更新(异步)
             if (existInfo != null)
             {
+                viewModel.UpLineLastFocusStation = existInfo.UpLineLastFocusStation;
+                viewModel.DownLineLastFocusStation = existInfo.DownLineLastFocusStation;
+                viewModel.LastLineType = existInfo.LastLineType;
+
                 existInfo = viewModel.ToBusLine();
 
 #pragma warning disable 4014
