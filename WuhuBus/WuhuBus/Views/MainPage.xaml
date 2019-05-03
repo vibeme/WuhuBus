@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="WuhuBus.Views.MainPage"
+             Title="芜湖公交">
+
+    <StackLayout Margin="20" >
+        <SearchBar Placeholder="输入路线" SearchButtonPressed="OnSearchBarButtonPressed"/>
+        <ListView x:Name="searchResult" VerticalOptions="FillAndExpand" IsVisible="False" ItemTapped="SearchResult_OnItemTapped" />
+        <ListView ItemsSource="{Binding Lines}" HasUnevenRows="true" ItemTapped="OnListViewItemTapped" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Text="{Binding FormatName}" />
+                            <Label Grid.Row="1" Text="{Binding RunTime}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

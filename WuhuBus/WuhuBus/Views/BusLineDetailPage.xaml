@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WuhuBus.Views.BusLineDetailPage"
+             Title="{Binding LineName}">
+
+    <ContentPage Title="{Binding UpLine}" >
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Text="{Binding CollectionTip}" Clicked="MenuItem_OnClicked" />
+        </ContentPage.ToolbarItems>
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30"  />
+                    <RowDefinition Height="Auto"  />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="{Binding UpLineRunTime}"></Label>
+                <Label Grid.Row="1" x:Name="upLineTip"></Label>
+                <ListView Grid.Row="2" x:Name="upLineStations" ItemsSource="{Binding UpLineStationList}" VerticalOptions="FillAndExpand" ItemTapped="UpLineStations_OnItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label VerticalOptions="Center" Text="{Binding Name}" />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+    </ContentPage>
+    <ContentPage Title="{Binding DownLine}" >
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Text="{Binding CollectionTip}" Clicked="MenuItem_OnClicked" />
+        </ContentPage.ToolbarItems>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20"  />
+                <RowDefinition Height="Auto"  />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Text="{Binding DownLineRunTime}"></Label>
+            <Label Grid.Row="1" x:Name="downLineTip"></Label>
+            <ListView Grid.Row="2" x:Name="downLineStations" ItemsSource="{Binding DownLineStationList}" VerticalOptions="FillAndExpand" ItemTapped="DownLineStations_OnItemTapped" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label VerticalOptions="Center" Text="{Binding Name}" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage>
+</TabbedPage>
