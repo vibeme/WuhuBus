@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,17 +15,24 @@ namespace WuhuBus.ApiSdk
 
             var webRequest = WebRequest.CreateHttp("http://220.180.139.42:8980/SmartBusServer/Main");
             webRequest.Method = "POST";
-            using (var stream = webRequest.GetRequestStream())
+            try
             {
-                var data = Encoding.UTF8.GetBytes(json);
-                stream.Write(data, 0, data.Length);
+                using (var stream = webRequest.GetRequestStream())
+                {
+                    var data = Encoding.UTF8.GetBytes(json);
+                    stream.Write(data, 0, data.Length);
+                }
+                using (var webResponse = await webRequest.GetResponseAsync())
+                {
+                    json = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
+                    return JsonConvert.DeserializeObject<ApiResponse<TR>>(json);
+                }
             }
-
-            using (var webResponse = await webRequest.GetResponseAsync())
+            catch (Exception e)
             {
-                json = new StreamReader(webResponse.GetResponseStream()).ReadToEnd();
-                return JsonConvert.DeserializeObject<ApiResponse<TR>>(json);
+                return new ApiResponse<TR>() { Error = { Code = 8888, Message = e.Message } };
             }
+        
         }
     }
 }
